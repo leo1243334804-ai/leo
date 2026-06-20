@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑神话：悟空 · 天命人攻略站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4a745;
+            --gold-light: #f0d080;
+            --gold-dark: #a07c30;
+            --red: #a02030;
+            --red-light: #c04050;
+            --dark: #0b0a0a;
+            --dark-card: #141110;
+            --dark-surface: #1e1a18;
+            --text: #e8e0d8;
+            --text-dim: #a09088;
+            --border-glow: rgba(212, 167, 69, 0.25);
+            --shadow-gold: 0 0 30px rgba(212, 167, 69, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dark);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: var(--gold-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            border-left: 6px solid var(--gold);
+            padding-left: 20px;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(212, 167, 69, 0.15);
+        }
+        .section-title i {
+            margin-right: 12px;
+            opacity: 0.8;
+        }
+
+        /* ===== 导航 ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: rgba(11, 10, 10, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 167, 69, 0.2);
+            padding: 0 24px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .navbar .logo i {
+            -webkit-text-fill-color: initial;
+            color: var(--gold);
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: var(--text-dim);
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--gold);
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.6rem;
+            color: var(--gold);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: radial-gradient(ellipse at 50% 0%, #1e1610 0%, var(--dark) 70%);
+            border-bottom: 1px solid rgba(212, 167, 69, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '⚔️';
+            font-size: 12rem;
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            opacity: 0.04;
+            transform: rotate(20deg);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            background: linear-gradient(180deg, #f0e0c0, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(212, 167, 69, 0.15);
+        }
+        .hero .sub {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-top: 12px;
+            letter-spacing: 6px;
+            font-weight: 300;
+        }
+        .hero .quote {
+            margin-top: 28px;
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            opacity: 0.7;
+            letter-spacing: 2px;
+        }
+
+        /* ===== 卡片 ===== */
+        .card {
+            background: var(--dark-card);
+            border: 1px solid rgba(212, 167, 69, 0.08);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 32px;
+            transition: 0.3s;
+            box-shadow: var(--shadow-gold);
+        }
+        .card:hover {
+            border-color: rgba(212, 167, 69, 0.2);
+            box-shadow: 0 0 40px rgba(212, 167, 69, 0.04);
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card h3 i {
+            color: var(--gold);
+            font-size: 1.3rem;
+            width: 28px;
+        }
+        .card h4 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin: 18px 0 8px;
+        }
+
+        /* ===== 章节卡片 (全流程) ===== */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-top: 8px;
+        }
+
+        .chapter-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 28px 30px;
+            border-left: 6px solid var(--gold);
+            transition: 0.3s;
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            border-left-color: var(--gold-light);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+        .chapter-card .ch-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .chapter-card .ch-num {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+        .chapter-card .ch-root {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            background: rgba(212, 167, 69, 0.08);
+            padding: 2px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 167, 69, 0.15);
+        }
+        .chapter-card h4 {
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            margin: 4px 0 10px;
+        }
+        .chapter-card .ch-theme {
+            display: inline-block;
+            background: rgba(160, 124, 48, 0.2);
+            color: var(--gold-light);
+            padding: 2px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(212, 167, 69, 0.1);
+        }
+        .chapter-card .ch-desc {
+            color: var(--text-dim);
+            font-size: 0.98rem;
+            margin: 12px 0 16px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 3px solid var(--gold-dark);
+        }
+        .chapter-card .ch-desc strong {
+            color: var(--gold-light);
+        }
+        .chapter-card .ch-boss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 6px 16px;
+            margin: 10px 0 14px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        .chapter-card .ch-boss-grid .boss-tag {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            padding: 2px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chapter-card .ch-boss-grid .boss-tag .star {
+            color: var(--gold);
+            font-size: 0.7rem;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        .chapter-card .ch-boss-grid .boss-tag .badge {
+            font-size: 0.6rem;
+            background: var(--gold-dark);
+            color: #fff;
+            padding: 0 8px;
+            border-radius: 10px;
+            opacity: 0.7;
+        }
+        .chapter-card .ch-collect {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 28px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.92rem;
+            color: var(--text-dim);
+        }
+        .chapter-card .ch-collect i {
+            color: var(--gold);
+            width: 20px;
+        }
+        .chapter-card .ch-collect span {
+            color: var(--gold-light);
+        }
+
+        /* ===== BOSS 表格 ===== */
+        .boss-section {
+            margin-top: 12px;
+        }
+        .boss-section .boss-chapter-title {
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid rgba(212, 167, 69, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .boss-section .boss-chapter-title .badge-count {
+            font-size: 0.8rem;
+            background: var(--dark-surface);
+            color: var(--text-dim);
+            padding: 0 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 167, 69, 0.1);
+        }
+        .boss-table-wrap {
+            overflow-x: auto;
+            margin-bottom: 8px;
+        }
+        .boss-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        .boss-table th {
+            background: var(--dark-surface);
+            color: var(--gold);
+            font-weight: 600;
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 2px solid var(--gold-dark);
+            white-space: nowrap;
+        }
+        .boss-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-dim);
+            vertical-align: middle;
+        }
+        .boss-table tr:hover td {
+            background: rgba(212, 167, 69, 0.03);
+        }
+        .boss-table .diff {
+            font-weight: 600;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .diff-6 {
+            color: #ff2d2d;
+        }
+        .diff-5 {
+            color: #ff6b6b;
+        }
+        .diff-4 {
+            color: #ffb347;
+        }
+        .diff-3 {
+            color: #f0d080;
+        }
+        .diff-2 {
+            color: #b0c0a0;
+        }
+        .boss-table .type-badge {
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            background: rgba(212, 167, 69, 0.12);
+            border: 1px solid rgba(212, 167, 69, 0.1);
+            white-space: nowrap;
+        }
+        .boss-table .type-badge.yao {
+            background: rgba(192, 64, 80, 0.15);
+            border-color: rgba(192, 64, 80, 0.2);
+            color: var(--red-light);
+        }
+        .boss-table .type-badge.tou {
+            background: rgba(212, 167, 69, 0.1);
+            border-color: rgba(212, 167, 69, 0.1);
+            color: var(--gold-light);
+        }
+        .boss-table .type-badge.person {
+            background: rgba(100, 160, 200, 0.1);
+            border-color: rgba(100, 160, 200, 0.1);
+            color: #80b8d8;
+        }
+
+        /* ===== 收集 ===== */
+        .collect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .collect-item {
+            background: var(--dark-surface);
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 167, 69, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .collect-item i {
+            color: var(--gold);
+            width: 24px;
+            text-align: center;
+        }
+        .collect-item .label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .collect-item .value {
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        /* ===== 评分 ===== */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+        }
+        .score-item {
+            background: var(--dark-surface);
+            padding: 18px 14px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(212, 167, 69, 0.06);
+        }
+        .score-item .num {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+        .score-item .source {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ===== 版本 ===== */
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+        }
+        .version-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px 18px;
+            border: 1px solid rgba(212, 167, 69, 0.06);
+            text-align: center;
+        }
+        .version-card .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .version-card .vname {
+            color: var(--text);
+            font-weight: 600;
+            margin: 6px 0 4px;
+        }
+        .version-card .vinfo {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-item .q {
+            font-weight: 600;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-item .q i {
+            color: var(--gold);
+        }
+        .faq-item .a {
+            color: var(--text-dim);
+            padding-left: 32px;
+            margin-top: 4px;
+        }
+
+        /* ===== 工具卡片 ===== */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+        .tool-card {
+            background: var(--dark-surface);
+            border-radius: 14px;
+            padding: 24px 22px;
+            border: 1px solid rgba(212, 167, 69, 0.06);
+            transition: 0.3s;
+            text-align: center;
+        }
+        .tool-card:hover {
+            border-color: rgba(212, 167, 69, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        .tool-card .tool-icon {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .tool-card h4 {
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+        .tool-card p {
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+        }
+        .tool-card .tool-link {
+            display: inline-block;
+            background: rgba(212, 167, 69, 0.12);
+            color: var(--gold-light);
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(212, 167, 69, 0.2);
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .tool-card .tool-link:hover {
+            background: rgba(212, 167, 69, 0.2);
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            border-top: 1px solid rgba(212, 167, 69, 0.08);
+            padding: 40px 0 30px;
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        .footer .heart {
+            color: var(--red-light);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 820px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--dark);
+                position: absolute;
+                top: 68px;
+                left: 0;
+                width: 100%;
+                padding: 20px 28px;
+                gap: 16px;
+                border-bottom: 1px solid rgba(212, 167, 69, 0.15);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+                letter-spacing: 4px;
+            }
+            .hero .sub {
+                font-size: 1rem;
+                letter-spacing: 3px;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .card {
+                padding: 20px 18px;
+            }
+            .chapter-card {
+                padding: 20px 18px;
+            }
+            .chapter-card .ch-boss-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero .quote {
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 0 14px;
+            }
+            .navbar .logo {
+                font-size: 1.2rem;
+            }
+            .chapter-card .ch-boss-grid {
+                grid-template-columns: 1fr;
+            }
+            .chapter-card .ch-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+            .boss-table {
+                font-size: 0.78rem;
+            }
+            .boss-table th,
+            .boss-table td {
+                padding: 6px 8px;
+            }
+            .version-grid,
+            .score-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .collect-grid {
+                grid-template-columns: 1fr;
+            }
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航 ===== -->
+    <nav class="navbar" id="top">
+        <div class="logo"><i class="fas fa-crown"></i> 天命人攻略</div>
+        <button class="nav-toggle" id="navToggle" aria-label="切换导航">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#intro">简介</a></li>
+            <li><a href="#story">故事</a></li>
+            <li><a href="#chapters">全流程</a></li>
+            <li><a href="#bosses">BOSS</a></li>
+            <li><a href="#collect">收集</a></li>
+            <li><a href="#builds">流派</a></li>
+            <li><a href="#reviews">评测</a></li>
+            <li><a href="#versions">版本</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#tools">工具</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+        <div class="container">
+            <h1>黑神话 · 悟空</h1>
+            <div class="sub">天命人攻略站</div>
+            <div class="quote">
+                <i class="fas fa-quote-left" style="opacity:0.4;margin-right:8px;"></i>
+                踏平坎坷成大道，斗罢艰险又出发
+                <i class="fas fa-quote-right" style="opacity:0.4;margin-left:8px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ===== 1. 简介 ===== -->
+        <section id="intro">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i>游戏简介</h2>
+            <div class="card">
+                <p style="font-size:1.05rem;">
+                    <strong>《黑神话：悟空》</strong> 是由游戏科学（Game Science）开发、以中国神话为背景的
+                    动作角色扮演游戏。游戏以中国古典四大名著之一、吴承恩所著《西游记》为背景设定，
+                    通过情感叙事再现充满东方美学特色的英雄传奇。
+                </p>
+                <p style="margin-top:12px;color:var(--text-dim);">
+                    游戏于 <strong>2024年8月20日</strong> 正式发售，登陆 Steam、Epic Games Store、WeGame、PS5 等平台。
+                    共推出四个版本：数字标准版、数字豪华版、实体豪华版和实体收藏版。
+                </p>
+                <p style="margin-top:8px;color:var(--text-dim);font-size:0.95rem;">
+                    <i class="fas fa-tag" style="color:var(--gold);"></i> 全平台销量已突破 <strong>1000万份</strong>，
+                    成为国产游戏现象级作品。
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 2. 故事背景 ===== -->
+        <section id="story">
+            <h2 class="section-title"><i class="fas fa-scroll"></i>故事背景</h2>
+            <div class="card">
+                <p>
+                    《黑神话：悟空》的故事发生在西游师徒取经任务圆满完成之后。已经封位“斗战胜佛”的
+                    <strong>孙悟空</strong> 决意放弃佛位，回到花果山“退休”。天庭派出二郎神率领天兵天将再临花果山，
+                    以屠戮花果山为挟“请”回悟空。最终悟空落败，其六根中的五根——
+                    <strong>眼、耳、鼻、舌、身</strong> ——被分给五位妖王（黑熊、貂鼠、黄眉、百眼、牛魔），
+                    而其“意”则化为一块奇石，落在花果山巅。
+                </p>
+                <p style="margin-top:12px;color:var(--text-dim);">
+                    玩家扮演的主角 <strong>“天命人”</strong> 正是猴子猴孙中的一员，踏上收集“五根”、复活孙悟空的征程。
+                    游戏主线要求收集大圣的六根器，前五回出现的五个根器分别对应佛门五毒——
+                    <span style="color:var(--gold-light);font-weight:600;">贪、嗔、慢、痴、疑</span>。
+                </p>
+                <p style="margin-top:10px;color:var(--text-dim);font-size:0.95rem;">
+                    <i class="fas fa-info-circle" style="color:var(--gold);"></i>
+                    游戏共六大章节，每个章节围绕一种“毒”展开叙事，层层递进，最终在花果山迎来宿命对决。
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 3. 全流程攻略（六大章节 · 详细版） ===== -->
+        <section id="chapters">
+            <h2 class="section-title"><i class="fas fa-map-signs"></i>全流程攻略 · 六大章节</h2>
+            <div class="chapters-grid">
+
+                <!-- 第一章 黑风山 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第一章 · 黑风山</span>
+                        <span class="ch-root"><i class="fas fa-eye"></i> 眼见喜 · 眼根</span>
+                    </div>
+                    <h4>黑风山 · 贪</h4>
+                    <span class="ch-theme"><i class="fas fa-dragon"></i> 主题：贪 —— 金池长老贪恋袈裟，引火烧身</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 天命人循着花果山落下的“眼见喜”根器来到黑风山。
+                        山中黑熊精偷走锦斓袈裟，金池长老为贪念所困。本章以“贪”为主题，
+                        揭露了因贪欲而起的种种业障。最终击败黑熊精，取回眼根。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">牯护院 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">广智 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">幽魂 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">灵虚子 <span class="badge">妖王</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">波里个浪 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">广谋 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">白衣秀士 <span class="badge">妖王</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">金池长老 <span class="badge">妖王·隐藏</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">黑风大王 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">黑熊精 <span class="badge">妖王·关底</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">赤髯龙 <span class="badge">妖王·隐藏</span><span class="star">★★★★</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 色蕴（五蕴之一）</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：山中 · 林外</span>
+                        <span><i class="fas fa-circle"></i> 打坐蒲团：1处</span>
+                        <span><i class="fas fa-key"></i> 要紧物事：色蕴 · 锦斓袈裟剧情</span>
+                        <span><i class="fas fa-dragon"></i> 隐藏BOSS：赤髯龙（需第二章龙鳞触发）</span>
+                        <span><i class="fas fa-bell"></i> 隐藏触发：敲三口钟召唤金池长老</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 贪念如火，烧毁的不仅仅是黑风山，更是人心中的佛性。
+                        金池长老因贪失慧，最终自焚而亡。
+                    </div>
+                </div>
+
+                <!-- 第二章 黄风岭 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第二章 · 黄风岭</span>
+                        <span class="ch-root"><i class="fas fa-ear"></i> 耳听怒 · 耳根</span>
+                    </div>
+                    <h4>黄风岭 · 嗔</h4>
+                    <span class="ch-theme"><i class="fas fa-wind"></i> 主题：嗔 —— 因嗔怒而起报复，终伤及自身</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 黄风岭黄风怪因嗔怒天庭不公而占山为王，
+                        其风沙之力遮天蔽日。天命人需穿越风沙，击败虎先锋、石先锋等强敌，
+                        最终面对黄风大圣。本章以“嗔”为核，展现愤怒如何扭曲人心。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">浪里个波 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">地狼 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">沙国王+沙二郎 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">虎伥 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">虎先锋 <span class="badge">妖王</span><span class="star">★★★★★</span></span>
+                        <span class="boss-tag">石母 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">石中人 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">石先锋 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">百目真人 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">沙大郎 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">黄风大圣 <span class="badge">妖王·关底</span><span class="star">★★★★★</span></span>
+                        <span class="boss-tag">石敢当 <span class="badge">妖王·隐藏</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">疯虎 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">黄袍员外 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">蝜蝂 <span class="badge">妖王·隐藏</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">小骊龙 <span class="badge">妖王·隐藏</span><span class="star">★★★★</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 受蕴（五蕴之一）</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：卧虎寺 · 沙门村</span>
+                        <span><i class="fas fa-circle"></i> 打坐蒲团：1处</span>
+                        <span><i class="fas fa-key"></i> 要紧物事：受蕴 · 飞龙鳞片</span>
+                        <span><i class="fas fa-landmark"></i> 隐藏地图：黄金国（需完成支线）</span>
+                        <span><i class="fas fa-dragon"></i> 隐藏BOSS：小骊龙（需飞龙鳞片）</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 嗔怒如风，席卷一切却终将消散。虎先锋之怒、黄风怪之嗔，
+                        皆为执着所困。唯有放下嗔恨，方能见自性。
+                    </div>
+                </div>
+
+                <!-- 第三章 小西天 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第三章 · 小西天</span>
+                        <span class="ch-root"><i class="fas fa-nose"></i> 鼻嗅爱 · 鼻根</span>
+                    </div>
+                    <h4>小西天 · 慢</h4>
+                    <span class="ch-theme"><i class="fas fa-mountain"></i> 主题：慢 —— 傲慢使众生迷失，妄图取代未来佛</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 小西天黄眉老佛傲慢自大，妄图取代弥勒成为未来佛。
+                        他设下重重考验，四僧连战、亢金龙、魔将等强敌轮番登场。
+                        本章以“慢”为主题，揭示傲慢如何遮蔽智慧与慈悲。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">赤尻马猴 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">魔将·莲眼 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">魔将·劫波 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">魔将·妄相 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">无量蝠 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">不空 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">不能 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">不净 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">不白 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">海上僧 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">浪里个浪 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">老人参精 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">亢金龙 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">亢金星君 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">魔将·妙音 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">青背龙 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">黄眉 <span class="badge">妖王·关底</span><span class="star">★★★★★</span></span>
+                        <span class="boss-tag">辰龙 <span class="badge">人物</span><span class="star">—</span></span>
+                        <span class="boss-tag">寅虎 <span class="badge">人物</span><span class="star">—</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 想蕴（五蕴之一）</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：浮屠牢 · 极乐谷</span>
+                        <span><i class="fas fa-circle"></i> 打坐蒲团：2处</span>
+                        <span><i class="fas fa-key"></i> 要紧物事：想蕴</span>
+                        <span><i class="fas fa-landmark"></i> 隐藏内容：小西天支线任务</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 傲慢是最大的无明。黄眉自诩未来佛，却不知真正的佛性
+                        在于谦卑与慈悲。四僧连战隐喻“慢”的四种面相。
+                    </div>
+                </div>
+
+                <!-- 第四章 盘丝岭 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第四章 · 盘丝岭</span>
+                        <span class="ch-root"><i class="fas fa-tongue"></i> 舌尝思 · 舌根</span>
+                    </div>
+                    <h4>盘丝岭 · 痴</h4>
+                    <span class="ch-theme"><i class="fas fa-spider"></i> 主题：痴 —— 不明事理，是非不分，为执念所困</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 盘丝岭百眼魔君为求长生，将身边小妖卖给昆仑炼丹，
+                        痴迷于力量与永生。天命人深入盘丝洞，面对毒敌大王、晦月魔君等强敌，
+                        最终揭穿百眼魔君的痴妄。本章以“痴”为核心，展现执念如何吞噬人性。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">二姐 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">琴螂仙 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">百足虫 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">右手虫 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">波里个波 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">虫总兵 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">蘑女 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">靡道人 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">紫珠儿 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">毒敌大王 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">晦月魔君 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">小黄龙 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">百眼魔君 <span class="badge">妖王·关底</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">黑手道人 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">猪八戒 <span class="badge">人物</span><span class="star">—</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 行蕴（五蕴之一）</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：盘丝洞</span>
+                        <span><i class="fas fa-landmark"></i> 隐藏地图：紫云山（需完成支线）</span>
+                        <span><i class="fas fa-dragon"></i> 隐藏BOSS：毒敌大王 · 小黄龙</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 痴迷于外物，终将迷失本心。百眼魔君为长生不择手段，
+                        却不知真正的“长生”在于觉悟与放下。
+                    </div>
+                </div>
+
+                <!-- 第五章 火焰山 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第五章 · 火焰山</span>
+                        <span class="ch-root"><i class="fas fa-hand"></i> 身本忧 · 身根</span>
+                    </div>
+                    <h4>火焰山 · 疑</h4>
+                    <span class="ch-theme"><i class="fas fa-fire"></i> 主题：疑 —— 牛魔王的中年危机，怀疑与背叛</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 火焰山牛魔王深陷“疑”的泥潭——怀疑兄弟、怀疑妻子、
+                        怀疑天命。在火焰的灼烧下，牛魔王的家族悲剧徐徐展开。
+                        天命人需穿越火焰山，击败牛魔王及其麾下战将。本章以“疑”收束五毒，
+                        最终在天命人与牛魔王的对决中达到情感高潮。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">五行战车 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">石父 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">急如火+快如风 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">云里雾+雾里云 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">兴烘掀+掀烘兴 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">燧统领 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">燧先锋 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">火灵元母 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">波浪浪 <span class="badge">头目</span><span class="star">★★</span></span>
+                        <span class="boss-tag">九叶灵芝精 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">阴阳鱼 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">壁水金睛兽 <span class="badge">妖王·隐藏</span><span class="star">★★★★★</span></span>
+                        <span class="boss-tag">红孩儿 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">夜叉王 <span class="badge">妖王</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">火焰山土地 <span class="badge">人物</span><span class="star">—</span></span>
+                        <span class="boss-tag">牛魔王 <span class="badge">妖王·关底</span><span class="star">★★★★★</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 识蕴（五蕴之一）</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：火焰山</span>
+                        <span><i class="fas fa-fire"></i> 隐藏BOSS：壁水金睛兽（高难度）</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 疑是五毒之末，也是最难破除的障碍。牛魔王的一生，
+                        被“疑”所困——怀疑天命、怀疑兄弟、怀疑自我。唯有信，
+                        方能穿越火焰山的灼烤。
+                    </div>
+                </div>
+
+                <!-- 第六章 花果山 -->
+                <div class="chapter-card">
+                    <div class="ch-header">
+                        <span class="ch-num">第六章 · 花果山</span>
+                        <span class="ch-root"><i class="fas fa-crown"></i> 意 · 最终章</span>
+                    </div>
+                    <h4>花果山 · 归真</h4>
+                    <span class="ch-theme"><i class="fas fa-star"></i> 主题：归真 —— 清除不净“六根”，继承大圣意志</span>
+                    <div class="ch-desc">
+                        <strong>章节概述：</strong> 天命人集齐五根，回到花果山巅。
+                        在这里，他将面对最强大的敌人——二郎显圣真君（杨戬），
+                        以及悟空残存的意念与身躯。最终决战不仅是对力量的考验，
+                        更是对“天命”的终极诠释：天命人戴上金刚紧箍，
+                        承接“孙悟空”名号与意志，成为新的齐天大圣。
+                    </div>
+
+                    <div style="font-weight:600;color:var(--gold-light);margin:6px 0 4px;font-size:0.95rem;">
+                        <i class="fas fa-skull"></i> 全BOSS列表（头目 &amp; 妖王）
+                    </div>
+                    <div class="ch-boss-grid">
+                        <span class="boss-tag">石子 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">毒统领 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">水木兽 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">跳浪蛟 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">浪波波 <span class="badge">头目</span><span class="star">★★★</span></span>
+                        <span class="boss-tag">金甲犀 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">步云鹿 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">凤翅将军 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">碧臂螂 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">大石敢当 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">王灵官 <span class="badge">头目</span><span class="star">★★★★</span></span>
+                        <span class="boss-tag">二郎显圣真君 <span class="badge">妖王</span><span class="star">★★★★★★</span></span>
+                        <span class="boss-tag">石猿+大圣残躯 <span class="badge">妖王·关底</span><span class="star">★★★★★★</span></span>
+                    </div>
+
+                    <div class="ch-collect">
+                        <span><i class="fas fa-gem"></i> 六根齐聚 · 意根归位</span>
+                        <span><i class="fas fa-map-pin"></i> 土地庙：花果山各处</span>
+                        <span><i class="fas fa-crown"></i> 最终BOSS：杨戬 · 大圣残躯</span>
+                        <span><i class="fas fa-flag-checkered"></i> 结局：天命人成为新“孙悟空”</span>
+                    </div>
+                    <div style="margin-top:12px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;">
+                        <i class="fas fa-quote-left" style="color:var(--gold-dark);"></i>
+                        <strong>深意：</strong> 清除六根不净，方显大圣真意。天命人不是替代悟空，
+                        而是继承他的意志——那是一种永不屈服的、敢于斗战天地的精神。
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== 4. 全BOSS攻略索引（完整列表 · 按章节分组） ===== -->
+        <section id="bosses">
+            <h2 class="section-title"><i class="fas fa-skull"></i>全BOSS攻略索引 · 完整版</h2>
+            <div class="card boss-section">
+
+                <!-- 第一章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-mountain"></i> 第一章 · 黑风山
+                    <span class="badge-count">11 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>牯护院</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>首个头目，练手用，注意长柄斧三连击节奏</td></tr>
+                            <tr><td>广智</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>火刀狼形态，击败后获得变身技能</td></tr>
+                            <tr><td>幽魂</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>"大头娃娃"，弱重击，建议先击败广智再挑战</td></tr>
+                            <tr><td>灵虚子</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-3">★★★</td><td>怕火，建议变身广智（火刀狼）战斗</td></tr>
+                            <tr><td>波里个浪</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>青蛙外观，血条较脆，先清理周围小青蛙</td></tr>
+                            <tr><td>广谋</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>擅长远程法术和瞬移，血条过半后召唤蛇群</td></tr>
+                            <tr><td>白衣秀士</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-3">★★★</td><td>额外BOSS，有两阶段战斗</td></tr>
+                            <tr><td>金池长老</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-3">★★★</td><td>敲钟三次触发，注意其吸血技能</td></tr>
+                            <tr><td>黑风大王</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>人形BOSS，长枪附魔，能化风无敌，身板较脆</td></tr>
+                            <tr><td>黑熊精</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-4">★★★★</td><td>黑风大王兽形态，血厚但攻击前摇明显</td></tr>
+                            <tr><td>赤髯龙</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-4">★★★★</td><td>需第二章获得龙鳞后返回触发</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第二章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-wind"></i> 第二章 · 黄风岭
+                    <span class="badge-count">16 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>浪里个波</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>土地庙"村口"旁水池中</td></tr>
+                            <tr><td>地狼</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>村口前方左侧区域</td></tr>
+                            <tr><td>沙国王+沙二郎</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>父子双BOSS战</td></tr>
+                            <tr><td>虎伥</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于定风桥上</td></tr>
+                            <tr><td>虎先锋</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-5">★★★★★</td><td>经典高难度，快慢招结合，需熟悉前摇</td></tr>
+                            <tr><td>石母</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>土地庙"藏风山凹"左侧山洞中</td></tr>
+                            <tr><td>石中人</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>额外BOSS，击败后解锁商店</td></tr>
+                            <tr><td>石先锋</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>收集6个佛眼珠可激活石敢当与其对战</td></tr>
+                            <tr><td>百目真人</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>沙大郎</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>击败后获得飞龙鳞片关键道具</td></tr>
+                            <tr><td>黄风大圣</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-5">★★★★★</td><td>三阶段战斗，风格差异大</td></tr>
+                            <tr><td>石敢当</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-4">★★★★</td><td>比石先锋更灵活，可让两者对打坐收渔利</td></tr>
+                            <tr><td>疯虎</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>黄袍员外</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>额外BOSS</td></tr>
+                            <tr><td>蝜蝂</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-4">★★★★</td><td>需完成猪八戒支线进入隐藏地图</td></tr>
+                            <tr><td>小骊龙</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-4">★★★★</td><td>需飞龙鳞片触发，捶地冲击波可立棍躲避</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第三章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-mountain"></i> 第三章 · 小西天
+                    <span class="badge-count">19 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>赤尻马猴</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>多阶段战斗</td></tr>
+                            <tr><td>魔将·莲眼</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于土地庙浮屠界上层</td></tr>
+                            <tr><td>魔将·劫波</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于小雷音寺正门前</td></tr>
+                            <tr><td>魔将·妄相</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>无量蝠</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>不空</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>不能</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>两阶段战斗</td></tr>
+                            <tr><td>不净</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>不白</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>海上僧</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于雷音寺右前方</td></tr>
+                            <tr><td>浪里个浪</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>—</td></tr>
+                            <tr><td>老人参精</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>—</td></tr>
+                            <tr><td>亢金龙</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>雷电系龙形态BOSS</td></tr>
+                            <tr><td>亢金星君</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>位于苦海-龟岛</td></tr>
+                            <tr><td>魔将·妙音</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>青背龙</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>黄眉</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-5">★★★★★</td><td>傲慢化身，范围近战+远程法术，建议重击流</td></tr>
+                            <tr><td>辰龙</td><td><span class="type-badge person">人物</span></td><td class="diff diff-2">—</td><td>非战斗NPC</td></tr>
+                            <tr><td>寅虎</td><td><span class="type-badge person">人物</span></td><td class="diff diff-2">—</td><td>非战斗NPC</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第四章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-spider"></i> 第四章 · 盘丝岭
+                    <span class="badge-count">15 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>二姐</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于兰喜村朱家大院</td></tr>
+                            <tr><td>琴螂仙</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>百足虫</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>—</td></tr>
+                            <tr><td>右手虫</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>波里个波</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>—</td></tr>
+                            <tr><td>虫总兵</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于黄花观虎蛇虫林</td></tr>
+                            <tr><td>蘑女</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>靡道人</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>位于紫云山落花庄</td></tr>
+                            <tr><td>紫珠儿</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>毒敌大王</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>晦月魔君</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>小黄龙</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>百眼魔君</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-4">★★★★</td><td>多阶段转换</td></tr>
+                            <tr><td>黑手道人</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>猪八戒</td><td><span class="type-badge person">人物</span></td><td class="diff diff-2">—</td><td>非战斗NPC</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第五章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-fire"></i> 第五章 · 火焰山
+                    <span class="badge-count">16 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>五行战车</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>石父</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>春秋寨上山岔路左边</td></tr>
+                            <tr><td>急如火+快如风</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>双BOSS战</td></tr>
+                            <tr><td>云里雾+雾里云</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>双BOSS战</td></tr>
+                            <tr><td>兴烘掀+掀烘兴</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>双BOSS战</td></tr>
+                            <tr><td>燧统领</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>燧先锋</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>火灵元母</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>波浪浪</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-2">★★</td><td>—</td></tr>
+                            <tr><td>九叶灵芝精</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>阴阳鱼</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>壁水金睛兽</td><td><span class="type-badge yao">妖王·隐藏</span></td><td class="diff diff-5">★★★★★</td><td>高难度隐藏BOSS</td></tr>
+                            <tr><td>红孩儿</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>夜叉王</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>火焰山土地</td><td><span class="type-badge person">人物</span></td><td class="diff diff-2">—</td><td>非战斗NPC</td></tr>
+                            <tr><td>牛魔王</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-5">★★★★★</td><td>经典西游角色</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第六章 -->
+                <div class="boss-chapter-title">
+                    <i class="fas fa-tree"></i> 第六章 · 花果山
+                    <span class="badge-count">13 个</span>
+                </div>
+                <div class="boss-table-wrap">
+                    <table class="boss-table">
+                        <thead>
+                            <tr><th>BOSS</th><th>分类</th><th>难度</th><th>核心打法 / 备注</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>石子</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>毒统领</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>水木兽</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>跳浪蛟</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>浪波波</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-3">★★★</td><td>—</td></tr>
+                            <tr><td>金甲犀</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>步云鹿</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>凤翅将军</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>碧臂螂</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>大石敢当</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>王灵官</td><td><span class="type-badge tou">头目</span></td><td class="diff diff-4">★★★★</td><td>—</td></tr>
+                            <tr><td>二郎显圣真君</td><td><span class="type-badge yao">妖王</span></td><td class="diff diff-6">★★★★★★</td><td>游戏最强BOSS之一</td></tr>
+                            <tr><td>石猿+大圣残躯</td><td><span class="type-badge yao">妖王·关底</span></td><td class="diff diff-6">★★★★★★</td><td>最终决战，清除不净"六根"</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top:24px;color:var(--text-dim);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);padding-top:16px;">
+                    <i class="fas fa-info-circle" style="color:var(--gold);"></i>
+                    本作BOSS总数约为 <strong>55头目 + 26妖王 = 81</strong> 个，以上列表涵盖各章节主要头目与妖王。
+                    “人物”类非战斗NPC未列入难度评级。
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== 5. 全收集指南 ===== -->
+        <section id="collect">
+            <h2 class="section-title"><i class="fas fa-diamond"></i>全收集指南</h2>
+            <div class="card">
+                <h3><i class="fas fa-gem"></i> 五蕴收集（五蕴对应五章）</h3>
+                <div class="collect-grid">
+                    <div class="collect-item"><i class="fas fa-circle"></i><span class="label">色蕴</span><span class="value">第一章 黑风山</span></div>
+                    <div class="collect-item"><i class="fas fa-circle"></i><span class="label">受蕴</span><span class="value">第二章 黄风岭</span></div>
+                    <div class="collect-item"><i class="fas fa-circle"></i><span class="label">想蕴</span><span class="value">第三章 小西天</span></div>
+                    <div class="collect-item"><i class="fas fa-circle"></i><span class="label">行蕴</span><span class="value">第四章 盘丝岭</span></div>
+                    <div class="collect-item"><i class="fas fa-circle"></i><span class="label">识蕴</span><span class="value">第五章 火焰山</span></div>
+                </div>
+
+                <h3 style="margin-top:28px;"><i class="fas fa-map"></i> 隐藏地图开启条件</h3>
+                <ul style="color:var(--text-dim);list-style:none;padding-left:0;">
+                    <li style="padding:6px 0;">▪ <strong>黄金国</strong> — 第二章黄风岭，需完成特定支线</li>
+                    <li style="padding:6px 0;">▪ <strong>紫云山</strong> — 第四章盘丝岭，需完成特定支线</li>
+                </ul>
+
+                <h3 style="margin-top:28px;"><i class="fas fa-tree"></i> 打坐蒲团 &amp; 土地庙</h3>
+                <p style="color:var(--text-dim);">
+                    六大章节全部土地庙位置及打坐点坐标，请参考章节内标注。
+                    灵蕴、药材、要紧物事分布遍布全地图，建议配合互动地图使用。
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 6. 技能加点与流派 ===== -->
+        <section id="builds">
+            <h2 class="section-title"><i class="fas fa-fist-raised"></i>技能加点与流派</h2>
+            <div class="card">
+                <h3><i class="fas fa-arrow-up"></i> 前期加点推荐（1-2章）</h3>
+                <ul style="color:var(--text-dim);padding-left:20px;margin-bottom:16px;">
+                    <li><strong>根基</strong>：优先点出“定息存神”，提高气力值</li>
+                    <li><strong>武艺</strong>：优先拉满“直取”提升攻击力</li>
+                    <li><strong>棍法</strong>：前期BOSS战推荐 <strong>劈棍</strong>，跑图推荐 <strong>戳棍</strong></li>
+                    <li><strong>体段修行</strong>：前期不建议点</li>
+                </ul>
+
+                <h3><i class="fas fa-bolt"></i> 关键天赋</h3>
+                <ul style="color:var(--text-dim);padding-left:20px;margin-bottom:16px;">
+                    <li><strong>断筋</strong>：建议点满，敌人血量越低重击伤害越高</li>
+                    <li><strong>劈棍初始天赋“识破”</strong>：适合初期使用</li>
+                </ul>
+
+                <h3><i class="fas fa-shield-alt"></i> 装备推荐</h3>
+                <ul style="color:var(--text-dim);padding-left:20px;margin-bottom:16px;">
+                    <li><strong>前期</strong>：藏风套（第一章可获得），闪避获得棍势，减技能CD</li>
+                    <li><strong>后期</strong>：玄铁套，提高铜头铁臂获得的棍势并减CD</li>
+                    <li><strong>法术流</strong>：赭黄套、青铜套 + 百目真人 + 玉观音葫芦</li>
+                </ul>
+
+                <h3><i class="fas fa-fire"></i> 热门流派</h3>
+                <ul style="color:var(--text-dim);padding-left:20px;">
+                    <li><strong>物理流</strong>：主加武艺和棍法，追求高输出</li>
+                    <li><strong>法术流</strong>：主加神通（定身法 / 安身法 / 禁字法等）</li>
+                    <li><strong>变身流</strong>：利用毫毛-身外身法等技能</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== 7. 媒体评价 ===== -->
+        <section id="reviews">
+            <h2 class="section-title"><i class="fas fa-star"></i>媒体评价与荣誉</h2>
+            <div class="card">
+                <div class="score-grid">
+                    <div class="score-item"><div class="num">10</div><div class="source">IGN 中国</div></div>
+                    <div class="score-item"><div class="num">8.0</div><div class="source">IGN 全球</div></div>
+                    <div class="score-item"><div class="num">8.0</div><div class="source">GameSpot</div></div>
+                    <div class="score-item"><div class="num">83</div><div class="source">Metacritic</div></div>
+                    <div class="score-item"><div class="num">8.7</div><div class="source">PC Gamer</div></div>
+                </div>
+
+                <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);">
+                    <blockquote style="color:var(--gold-light);font-style:italic;border-left:3px solid var(--gold);padding-left:20px;">
+                        “《黑神话：悟空》绝对可以说是一座中国游戏行业的里程碑，它所呈现的优秀品质
+                        对得起这四年来它背负的所有期待。”
+                        <footer style="color:var(--text-dim);font-style:normal;margin-top:4px;">— IGN 中国</footer>
+                    </blockquote>
+                    <blockquote style="color:var(--text-dim);font-style:italic;border-left:3px solid var(--gold-dark);padding-left:20px;margin-top:16px;">
+                        “尽管存在一些令人沮丧的技术问题，《黑神话：悟空》仍然是一款出色的动作游戏，
+                        拥有精彩的战斗、令人兴奋的BOSS、诱人的秘密和美丽的世界。”
+                        <footer style="color:var(--text-dim);font-style:normal;margin-top:4px;">— IGN 全球</footer>
+                    </blockquote>
+                </div>
+
+                <div style="margin-top:20px;color:var(--text-dim);">
+                    <p><strong>赞誉集中点：</strong></p>
+                    <ul style="padding-left:20px;">
+                        <li>精美的美术画面和场景表现（虚幻引擎5，世界一流水平）</li>
+                        <li>对《西游记》名著特色的诠释</li>
+                        <li>丰富的BOSS设计和战斗体验</li>
+                        <li>独特的中国传统文化底蕴</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 8. 版本与购买 ===== -->
+        <section id="versions">
+            <h2 class="section-title"><i class="fas fa-shopping-cart"></i>版本与购买信息</h2>
+            <div class="card">
+                <div class="version-grid">
+                    <div class="version-card"><div class="price">¥268</div><div class="vname">数字标准版</div><div class="vinfo">游戏本体</div></div>
+                    <div class="version-card"><div class="price">¥328</div><div class="vname">数字豪华版</div><div class="vinfo">本体 + 豪华升级包</div></div>
+                    <div class="version-card"><div class="price">¥820</div><div class="vname">实体豪华版</div><div class="vinfo">已售罄</div></div>
+                    <div class="version-card"><div class="price">¥1998</div><div class="vname">实体收藏版</div><div class="vinfo">已售罄</div></div>
+                </div>
+                <p style="margin-top:16px;color:var(--text-dim);text-align:center;">
+                    <i class="fas fa-tag" style="color:var(--gold);"></i> DLC豪华升级包：¥60 &nbsp;·&nbsp;
+                    <i class="fas fa-desktop" style="color:var(--gold);"></i> 平台：Steam · Epic · WeGame · PS5
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== 9. FAQ ===== -->
+        <section id="faq">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i>常见问题</h2>
+            <div class="card">
+                <div class="faq-item">
+                    <div class="q"><i class="fas fa-crown"></i> 游戏难度如何？</div>
+                    <div class="a">游戏具有较高挑战性，被许多玩家与“魂”系列游戏相比较。但通过合理的技能加点和装备搭配，普通玩家也能通关。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><i class="fas fa-clock"></i> 一周目能完成全收集吗？</div>
+                    <div class="a">部分BOSS和收集品需在特定时间节点前完成——打了关底BOSS后一些BOSS会消失，只能二周目再见。建议优先推进主线，大量支线和隐藏内容可延后至二周目。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><i class="fas fa-hourglass-half"></i> 游戏时长大概多久？</div>
+                    <div class="a">主线通关约30-40小时，全收集约60-80小时。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="q"><i class="fas fa-microchip"></i> 配置要求高吗？</div>
+                    <div class="a">游戏采用虚幻引擎5开发，对硬件有一定要求。建议参考官方配置表进行硬件评估。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 10. 实用工具（带真实链接） ===== -->
+        <section id="tools">
+            <h2 class="section-title"><i class="fas fa-tools"></i>实用工具推荐</h2>
+            <div class="card">
+                <div class="tool-grid">
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-map"></i></div>
+                        <h4>互动地图</h4>
+                        <p>游侠网自制互动地图，包含打坐蒲团、土地庙、道具装备、BOSS位置和隐藏地点等全部重要信息。</p>
+                        <a href="https://www.ali213.net/zt/blackmythwukong/map/" target="_blank" class="tool-link">
+                            <i class="fas fa-external-link-alt"></i> 打开互动地图
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-save"></i></div>
+                        <h4>修改器 / 存档工具</h4>
+                        <p>游民星空多功能修改器，支持无限生命、无限气力、快速击杀、物品不减、地图传送、坐标调节等功能。</p>
+                        <a href="https://down.gamersky.com/pc/202409/1818483.shtml" target="_blank" class="tool-link">
+                            <i class="fas fa-external-link-alt"></i> 下载修改器
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-sliders-h"></i></div>
+                        <h4>配置优化工具</h4>
+                        <p>简易大地图MOD，游戏内实时查看地图，再也不怕迷路错过BOSS或全搜集，提升探索效率。</p>
+                        <a href="https://patch.ali213.net/showpatch/256503.html" target="_blank" class="tool-link">
+                            <i class="fas fa-external-link-alt"></i> 查看优化工具
+                        </a>
+                    </div>
+
+                </div>
+                <p style="margin-top:20px;color:var(--text-dim);font-size:0.85rem;text-align:center;border-top:1px solid rgba(255,255,255,0.04);padding-top:16px;">
+                    <i class="fas fa-shield-alt" style="color:var(--gold);"></i>
+                    提示：修改器类工具使用时建议添加到杀毒软件信任区域（白名单），否则可能被系统阻止。
+                    适度使用可提升体验，过度修改可能影响成就或存档兼容性。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                <i class="fas fa-crown" style="color:var(--gold);"></i>
+                天命人攻略站 · 黑神话：悟空
+                <span style="margin:0 12px;opacity:0.2;">|</span>
+                踏平坎坷成大道，斗罢艰险又出发
+            </p>
+            <p style="margin-top:8px;font-size:0.8rem;">
+                本攻略站为爱好者制作，非官方站点。
+                <span class="heart">❤</span> 所有权利归游戏科学（Game Science）所有。
+            </p>
+            <p style="margin-top:12px;">
+                <a href="#top" style="color:var(--gold-dark);font-size:0.9rem;">
+                    <i class="fas fa-arrow-up"></i> 回到顶部
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== 移动端导航 ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('navToggle');
+            const links = document.getElementById('navLinks');
+
+            toggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                links.classList.toggle('open');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    links.classList.remove('open');
+                });
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.navbar')) {
+                    links.classList.remove('open');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
